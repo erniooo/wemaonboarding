@@ -1,0 +1,15 @@
+# Root .gitignore
+/portal/vendor/
+/portal/node_modules/
+/portal/public/build/
+/portal/public/hot/
+/portal/storage/*.key
+/portal/.env
+/portal/.env.backup
+/portal/.env.production
+/portal/.phpunit.result.cache
+/portal/.phpunit.cache
+/portal/auth.json
+.DS_Store
+Thumbs.db
+*.pdf
