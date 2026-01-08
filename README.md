@@ -1,11 +1,10 @@
-# WEMA Onboarding Demo
+# WEMA Onboarding Portal (Demo)
 
-Dieses Repo enthält eine kleine Demo-Lernplattform als Mock-Onboarding.
+Mock Onboarding/Lernportal für eine Demo: modernes Dashboard mit Modulen, ein Mock-Login (nur Name) und ein ausgearbeitetes Modul **„Grundlagen & Compliance“** inkl. Fortschritt und HeyGen-Embeds (per `iframe`).
 
-- PDF im Root: `Hallo, ich brauche ein paar Informationen zu folge.pdf`
-- Laravel Portal: `portal/`
+## Quickstart
 
-## Starten
+Voraussetzungen: PHP 8.2+, Composer, Node.js/NPM.
 
 ```bash
 cd portal
@@ -17,12 +16,33 @@ npm run dev
 php artisan serve
 ```
 
-## HeyGen
+Dann im Browser öffnen: `http://127.0.0.1:8000`
 
-Die HeyGen-Embeds werden über `.env` konfiguriert:
+## HeyGen einbinden
+
+Trage die Embed-URLs in `.env` ein:
 
 ```env
-HEYGEN_VIDEO_URL="https://…"
-HEYGEN_AVATAR_URL="https://…"
+HEYGEN_VIDEO_URL="https://..."
+HEYGEN_AVATAR_URL="https://..."
 ```
 
+## LiveAvatar einbinden
+
+Der FAQ-/Buddy-Bereich nutzt einen LiveAvatar `iframe`. Optional in `.env` setzen:
+
+```env
+LIVEAVATAR_URL="https://embed.liveavatar.com/v1/..."
+```
+
+## Lokale Videos (Demo)
+
+MP4-Dateien können unter `public/videos/` liegen und werden in `config/onboarding.php` referenziert.
+
+## Inhalte anpassen
+
+Module & Lessons liegen in `config/onboarding.php`.
+
+## Wie Fortschritt funktioniert
+
+Fortschritt (erledigte Lessons) wird in der Session gespeichert (kein DB-Setup nötig).
