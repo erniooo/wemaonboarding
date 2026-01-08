@@ -7,16 +7,25 @@ Mock Onboarding/Lernportal für eine Demo: modernes Dashboard mit Modulen, ein M
 Voraussetzungen: PHP 8.2+, Composer, Node.js/NPM.
 
 ```bash
-cd portal
 composer install
 npm install
 cp .env.example .env
 php artisan key:generate
+
+# Terminal 1
 npm run dev
+
+# Terminal 2
 php artisan serve
 ```
 
 Dann im Browser öffnen: `http://127.0.0.1:8000`
+
+## Deploy auf Railway
+
+- Build/Deploy ist via `nixpacks.toml` vorbereitet (Composer + Vite Build + DB-Migration).
+- Wichtig hinter Reverse-Proxy (Railway): damit CSS/JS korrekt per HTTPS geladen werden, müssen `X-Forwarded-*` Header vertraut werden (siehe `bootstrap/app.php`).
+- Railway ENV: Booleans/`null` ohne Anführungszeichen setzen (z.B. `APP_DEBUG=false`, `LOG_DEPRECATIONS_CHANNEL=null`, `SESSION_DOMAIN=null`).
 
 ## HeyGen einbinden
 

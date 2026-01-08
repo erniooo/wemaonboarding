@@ -2,6 +2,19 @@
 
 use Illuminate\Support\Str;
 
+$sessionDomain = env('SESSION_DOMAIN');
+if (is_string($sessionDomain)) {
+    $normalized = strtolower(trim($sessionDomain));
+    $sessionDomain = ($normalized === '' || $normalized === 'null' || $normalized === '(null)')
+        ? null
+        : $sessionDomain;
+}
+
+$sessionSecureCookie = env('SESSION_SECURE_COOKIE');
+$sessionSecureCookie = is_null($sessionSecureCookie)
+    ? null
+    : filter_var($sessionSecureCookie, FILTER_VALIDATE_BOOL, FILTER_NULL_ON_FAILURE);
+
 return [
 
     /*
@@ -34,7 +47,7 @@ return [
 
     'lifetime' => (int) env('SESSION_LIFETIME', 120),
 
-    'expire_on_close' => env('SESSION_EXPIRE_ON_CLOSE', false),
+    'expire_on_close' => filter_var(env('SESSION_EXPIRE_ON_CLOSE', false), FILTER_VALIDATE_BOOL),
 
     /*
     |--------------------------------------------------------------------------
@@ -47,7 +60,7 @@ return [
     |
     */
 
-    'encrypt' => env('SESSION_ENCRYPT', false),
+    'encrypt' => filter_var(env('SESSION_ENCRYPT', false), FILTER_VALIDATE_BOOL),
 
     /*
     |--------------------------------------------------------------------------
@@ -156,7 +169,7 @@ return [
     |
     */
 
-    'domain' => env('SESSION_DOMAIN'),
+    'domain' => $sessionDomain,
 
     /*
     |--------------------------------------------------------------------------
@@ -169,7 +182,7 @@ return [
     |
     */
 
-    'secure' => env('SESSION_SECURE_COOKIE'),
+    'secure' => $sessionSecureCookie,
 
     /*
     |--------------------------------------------------------------------------
@@ -182,7 +195,7 @@ return [
     |
     */
 
-    'http_only' => env('SESSION_HTTP_ONLY', true),
+    'http_only' => filter_var(env('SESSION_HTTP_ONLY', true), FILTER_VALIDATE_BOOL),
 
     /*
     |--------------------------------------------------------------------------
@@ -212,6 +225,6 @@ return [
     |
     */
 
-    'partitioned' => env('SESSION_PARTITIONED_COOKIE', false),
+    'partitioned' => filter_var(env('SESSION_PARTITIONED_COOKIE', false), FILTER_VALIDATE_BOOL),
 
 ];

@@ -11,6 +11,8 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->trustProxies(at: '*');
+
         $middleware->alias([
             'display.name' => \App\Http\Middleware\EnsureDisplayName::class,
             'redirect.if.display.name' => \App\Http\Middleware\RedirectIfDisplayName::class,
