@@ -51,6 +51,7 @@ class GrundlagenController extends Controller
 
         $heygenVideoUrl = $this->validatedEmbedUrl(config('onboarding.heygen.video_url'));
         $heygenAvatarUrl = $this->validatedEmbedUrl(config('onboarding.heygen.avatar_url'));
+        $liveavatarUrl = $this->validatedEmbedUrl(config('onboarding.liveavatar.url'));
 
         return view('modules.grundlagen', [
             'module' => $module,
@@ -64,6 +65,9 @@ class GrundlagenController extends Controller
             'heygen' => [
                 'video_url' => $heygenVideoUrl,
                 'avatar_url' => $heygenAvatarUrl,
+            ],
+            'liveavatar' => [
+                'url' => $liveavatarUrl,
             ],
         ]);
     }
@@ -113,4 +117,3 @@ class GrundlagenController extends Controller
         return filter_var($url, FILTER_VALIDATE_URL) ? $url : null;
     }
 }
-

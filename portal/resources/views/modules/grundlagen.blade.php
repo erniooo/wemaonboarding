@@ -122,7 +122,40 @@
                     </div>
 
                     <div class="mt-6 space-y-6">
-                        @if (($activeLesson['embed'] ?? null) === 'heygen_video')
+                        @if (($activeLesson['embed'] ?? null) === 'local_video')
+                            <div class="rounded-3xl border border-primary-100 bg-primary-50 p-5">
+                                <div class="text-sm font-black tracking-tight">Video</div>
+                                <div class="mt-3 overflow-hidden rounded-2xl border border-primary-100 bg-white">
+                                    @if (!empty($activeLesson['video']))
+                                        <div class="aspect-video">
+                                            <video
+                                                class="h-full w-full"
+                                                controls
+                                                playsinline
+                                                preload="metadata"
+                                            >
+                                                <source src="{{ asset($activeLesson['video']) }}" type="video/mp4">
+                                            </video>
+                                        </div>
+                                    @else
+                                        <div class="p-6 text-sm leading-6 text-muted">
+                                            Video ist noch nicht hinterlegt.
+                                        </div>
+                                    @endif
+                                </div>
+
+                                @if (! empty($activeLesson['points']) && is_array($activeLesson['points']))
+                                    <div class="mt-5 rounded-2xl border border-primary-100 bg-white p-4">
+                                        <div class="text-xs font-semibold tracking-wide text-muted">Key Points</div>
+                                        <ul class="mt-2 list-disc space-y-1 pl-5 text-sm leading-6 text-muted">
+                                            @foreach ($activeLesson['points'] as $point)
+                                                <li>{{ $point }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+                            </div>
+                        @elseif (($activeLesson['embed'] ?? null) === 'heygen_video')
                             <div class="rounded-3xl border border-primary-100 bg-primary-50 p-5">
                                 <div class="text-sm font-black tracking-tight">Video (HeyGen)</div>
                                 <div class="mt-3 overflow-hidden rounded-2xl border border-primary-100 bg-white">
@@ -140,7 +173,7 @@
                                         <div class="p-6 text-sm leading-6 text-muted">
                                             HeyGen Video ist noch nicht konfiguriert.
                                             <div class="mt-2 rounded-2xl bg-white px-4 py-3 font-mono text-xs text-ink">
-                                                HEYGEN_VIDEO_URL=&quot;https://…&quot;
+                                                HEYGEN_VIDEO_URL=&quot;https://...&quot;
                                             </div>
                                         </div>
                                     @endif
@@ -164,7 +197,7 @@
                                         <div class="p-6 text-sm leading-6 text-muted">
                                             HeyGen Avatar ist noch nicht konfiguriert.
                                             <div class="mt-2 rounded-2xl bg-white px-4 py-3 font-mono text-xs text-ink">
-                                                HEYGEN_AVATAR_URL=&quot;https://…&quot;
+                                                HEYGEN_AVATAR_URL=&quot;https://...&quot;
                                             </div>
                                         </div>
                                     @endif
@@ -187,6 +220,65 @@
                                 </div>
                             </div>
                         @endif
+
+                        @if (! empty($activeLesson['quiz']) && is_array($activeLesson['quiz']))
+                            <div class="rounded-3xl border border-primary-100 bg-white p-5">
+                                <div class="flex items-center justify-between gap-3">
+                                    <div class="text-sm font-black tracking-tight">Mini-Quiz (Demo)</div>
+                                    <span class="rounded-xl bg-primary-50 px-2 py-1 text-xs font-semibold text-primary-700">Platzhalter</span>
+                                </div>
+                                <p class="mt-2 text-sm leading-6 text-muted">
+                                    Demo-Inhalt: Antworten werden nicht gespeichert – nutze es nur als kurze Wiederholung.
+                                </p>
+
+                                <div class="mt-4 space-y-3">
+                                    @foreach ($activeLesson['quiz'] as $index => $quizItem)
+                                        <div class="rounded-2xl border border-primary-100 bg-white p-4">
+                                            <div class="text-sm font-bold text-ink">
+                                                {{ $index + 1 }}. {{ $quizItem['question'] ?? '' }}
+                                            </div>
+
+                                            <div class="mt-3 space-y-2">
+                                                @foreach (($quizItem['options'] ?? []) as $option)
+                                                    <label class="flex items-start gap-2 rounded-xl bg-primary-50/40 px-3 py-2 text-sm text-muted">
+                                                        <input type="radio" class="mt-0.5" disabled>
+                                                        <span>{{ $option }}</span>
+                                                    </label>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
+
+                        <div id="faq" class="rounded-3xl border border-primary-100 bg-primary-50 p-5">
+                            <div class="text-sm font-black tracking-tight">Fragen & Hilfe (LiveAvatar)</div>
+                            <p class="mt-2 text-sm leading-6 text-muted">
+                                Stell dem Avatar Fragen zum Onboarding oder zu dieser Lesson.
+                            </p>
+
+                            <div class="mt-3 overflow-hidden rounded-2xl border border-primary-100 bg-white">
+                                @if (! empty($liveavatar['url']))
+                                    <div class="aspect-video">
+                                        <iframe
+                                            src="{{ $liveavatar['url'] }}"
+                                            class="h-full w-full"
+                                            allow="microphone"
+                                            title="LiveAvatar Embed"
+                                            referrerpolicy="strict-origin-when-cross-origin"
+                                        ></iframe>
+                                    </div>
+                                @else
+                                    <div class="p-6 text-sm leading-6 text-muted">
+                                        LiveAvatar ist noch nicht konfiguriert.
+                                        <div class="mt-2 rounded-2xl bg-white px-4 py-3 font-mono text-xs text-ink">
+                                            LIVEAVATAR_URL=&quot;https://...&quot;
+                                        </div>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
 
                         <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                             <div class="text-xs font-semibold text-muted">

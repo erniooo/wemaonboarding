@@ -23,9 +23,21 @@ Dann im Browser öffnen: `http://127.0.0.1:8000`
 Trage die Embed-URLs in `.env` ein:
 
 ```env
-HEYGEN_VIDEO_URL="https://…"
-HEYGEN_AVATAR_URL="https://…"
+HEYGEN_VIDEO_URL="https://..."
+HEYGEN_AVATAR_URL="https://..."
 ```
+
+## LiveAvatar einbinden
+
+Der FAQ-/Buddy-Bereich nutzt einen LiveAvatar `iframe`. Optional in `.env` setzen:
+
+```env
+LIVEAVATAR_URL="https://embed.liveavatar.com/v1/..."
+```
+
+## Lokale Videos (Demo)
+
+MP4-Dateien können unter `public/videos/` liegen und werden in `config/onboarding.php` referenziert.
 
 ## Inhalte anpassen
 
@@ -34,4 +46,3 @@ Module & Lessons liegen in `config/onboarding.php`.
 ## Wie Fortschritt funktioniert
 
 Fortschritt (erledigte Lessons) wird in der Session gespeichert (kein DB-Setup nötig).
-
