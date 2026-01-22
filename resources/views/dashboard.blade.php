@@ -10,8 +10,8 @@
                         Willkommen, {{ $displayName }}
                     </h1>
                     <p class="mt-2 max-w-2xl text-sm leading-6 text-muted">
-                        Wähle ein Modul aus. Für die Demo ist nur <span class="font-semibold text-ink">Grundlagen &amp; Compliance</span>
-                        aktiv – die anderen Module sind sichtbar, aber noch gesperrt.
+                        Wähle ein Modul aus. Für die Demo sind <span class="font-semibold text-ink">Grundlagen &amp; Compliance</span>
+                        und <span class="font-semibold text-ink">HR &amp; Benefits</span> aktiv – die anderen Module sind sichtbar, aber noch gesperrt.
                     </p>
                 </div>
 
@@ -110,4 +110,3 @@
         </section>
     </div>
 @endsection
-

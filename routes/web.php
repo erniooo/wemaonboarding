@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\MockLoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Modules\GrundlagenController;
+use App\Http\Controllers\Modules\HrBenefitsController;
 
 Route::get('/', function () {
     return session()->has('display_name')
@@ -23,4 +24,8 @@ Route::middleware('display.name')->group(function () {
     Route::get('/modules/grundlagen', [GrundlagenController::class, 'show'])->name('modules.grundlagen');
     Route::post('/modules/grundlagen/lessons/{lessonKey}', [GrundlagenController::class, 'toggle'])
         ->name('modules.grundlagen.lessons.toggle');
+
+    Route::get('/modules/hr-benefits', [HrBenefitsController::class, 'show'])->name('modules.hr-benefits');
+    Route::post('/modules/hr-benefits/lessons/{lessonKey}', [HrBenefitsController::class, 'toggle'])
+        ->name('modules.hr-benefits.lessons.toggle');
 });

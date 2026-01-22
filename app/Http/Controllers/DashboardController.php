@@ -27,9 +27,14 @@ class DashboardController extends Controller
                 'percent' => $percent,
             ];
 
-            $module['href'] = (! ($module['locked'] ?? true) && $moduleKey === 'grundlagen')
-                ? route('modules.grundlagen')
-                : null;
+            $module['href'] = null;
+            if (! ($module['locked'] ?? true)) {
+                $module['href'] = match ($moduleKey) {
+                    'grundlagen' => route('modules.grundlagen'),
+                    'hr-benefits' => route('modules.hr-benefits'),
+                    default => null,
+                };
+            }
 
             return $module;
         }, config('onboarding.modules', []));
@@ -40,4 +45,3 @@ class DashboardController extends Controller
         ]);
     }
 }
-
