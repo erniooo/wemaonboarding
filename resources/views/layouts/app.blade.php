@@ -54,5 +54,7 @@
         <main class="mx-auto max-w-6xl px-6 py-8">
             @yield('content')
         </main>
+
+        @include('components.live-support-widget')
     </body>
 </html>

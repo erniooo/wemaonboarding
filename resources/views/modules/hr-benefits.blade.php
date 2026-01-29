@@ -280,32 +280,18 @@
                             </div>
                         @endif
 
-                        <div id="faq" class="rounded-3xl border border-primary-100 bg-primary-50 p-5">
-                            <div class="text-sm font-black tracking-tight">Fragen & Hilfe (LiveAvatar)</div>
+                        <div class="rounded-3xl border border-primary-100 bg-primary-50 p-5">
+                            <div class="text-sm font-black tracking-tight">Noch Fragen zu dieser Lesson?</div>
                             <p class="mt-2 text-sm leading-6 text-muted">
-                                Stell dem Avatar Fragen zu HR, Benefits oder zu dieser Lesson.
+                                Jetzt mit unserem KI Live‑Support chatten.
                             </p>
-
-                            <div class="mt-3 overflow-hidden rounded-2xl border border-primary-100 bg-white">
-                                @if (! empty($liveavatar['url']))
-                                    <div class="aspect-video">
-                                        <iframe
-                                            src="{{ $liveavatar['url'] }}"
-                                            class="h-full w-full"
-                                            allow="microphone"
-                                            title="LiveAvatar Embed"
-                                            referrerpolicy="strict-origin-when-cross-origin"
-                                        ></iframe>
-                                    </div>
-                                @else
-                                    <div class="p-6 text-sm leading-6 text-muted">
-                                        LiveAvatar ist noch nicht konfiguriert.
-                                        <div class="mt-2 rounded-2xl bg-white px-4 py-3 font-mono text-xs text-ink">
-                                            LIVEAVATAR_URL=&quot;https://...&quot;
-                                        </div>
-                                    </div>
-                                @endif
-                            </div>
+                            <button
+                                type="button"
+                                data-live-support-open
+                                class="mt-3 inline-flex items-center justify-center rounded-2xl bg-primary-500 px-4 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-primary-600 focus:outline-none focus:ring-4 focus:ring-primary-500/20"
+                            >
+                                Jetzt chatten
+                            </button>
                         </div>
 
                         <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
